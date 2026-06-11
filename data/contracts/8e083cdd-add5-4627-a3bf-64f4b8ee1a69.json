@@ -10,13 +10,14 @@
     "event_name": "Play label",
     "start_date": "2026-06-13",
     "end_date": "2026-06-16",
+    "payment_date": "2026-06-18",
     "total_amount": "120",
     "signature_date": "2026-06-10",
     "organisation_name": "Parapluie",
     "organisation_rep": "Eliah Debaene",
     "status": "archived",
-    "language": "en",
+    "language": "both",
     "id": "8e083cdd-add5-4627-a3bf-64f4b8ee1a69",
     "created_at": "2026-06-10T17:49:12+00:00",
-    "updated_at": "2026-06-10T18:51:30+00:00"
+    "updated_at": "2026-06-11T17:08:32+00:00"
 }

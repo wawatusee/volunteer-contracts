@@ -22,27 +22,28 @@ class Contract
      */
     public const FIELDS = [
         // Volunteer identity (pre-filled from worker or entered manually)
-        'worker_id'         => ['required' => false, 'type' => 'string'],
-        'volunteer_first'   => ['required' => false, 'type' => 'string'],
-        'volunteer_last'    => ['required' => false, 'type' => 'string'],
-        'volunteer_birth'   => ['required' => false, 'type' => 'date'],
+        'worker_id' => ['required' => false, 'type' => 'string'],
+        'volunteer_first' => ['required' => false, 'type' => 'string'],
+        'volunteer_last' => ['required' => false, 'type' => 'string'],
+        'volunteer_birth' => ['required' => false, 'type' => 'date'],
         'volunteer_address' => ['required' => false, 'type' => 'string'],
-        'volunteer_email'   => ['required' => false, 'type' => 'email'],
-        'volunteer_iban'    => ['required' => false, 'type' => 'iban'],
+        'volunteer_email' => ['required' => false, 'type' => 'email'],
+        'volunteer_iban' => ['required' => false, 'type' => 'iban'],
 
         // Contract specifics
-        'role'              => ['required' => true,  'type' => 'string'],
-        'event_name'        => ['required' => true,  'type' => 'string'],
-        'start_date'        => ['required' => true,  'type' => 'date'],
-        'end_date'          => ['required' => true,  'type' => 'date'],
-        'total_amount'      => ['required' => true,  'type' => 'positive_number'],
-        'signature_date'    => ['required' => true,  'type' => 'date'],
-        'organisation_name' => ['required' => true,  'type' => 'string'],
-        'organisation_rep'  => ['required' => true,  'type' => 'string'],
+        'role' => ['required' => true, 'type' => 'string'],
+        'event_name' => ['required' => true, 'type' => 'string'],
+        'start_date' => ['required' => true, 'type' => 'date'],
+        'end_date' => ['required' => true, 'type' => 'date'],
+        'payment_date' => ['required' => true, 'type' => 'date'],
+        'total_amount' => ['required' => true, 'type' => 'positive_number'],
+        'signature_date' => ['required' => true, 'type' => 'date'],
+        'organisation_name' => ['required' => true, 'type' => 'string'],
+        'organisation_rep' => ['required' => true, 'type' => 'string'],
 
         // Metadata
-        'status'            => ['required' => false, 'type' => 'string'], // draft|signed|archived
-        'language'          => ['required' => false, 'type' => 'string'], // nl|en|both
+        'status' => ['required' => false, 'type' => 'string'], // draft|signed|archived
+        'language' => ['required' => false, 'type' => 'string'], // nl|en|both
     ];
 
     // -------------------------------------------------------------------------
@@ -58,7 +59,7 @@ class Contract
      */
     public static function fromInput(array $raw): array
     {
-        $data   = [];
+        $data = [];
         $errors = [];
 
         foreach (self::FIELDS as $field => $meta) {
@@ -66,8 +67,8 @@ class Contract
 
             // Volunteer fields are required when no worker_id is given
             $isVolunteerField = str_starts_with($field, 'volunteer_');
-            $hasWorker        = !empty($raw['worker_id']);
-            $isRequired       = $meta['required'] || ($isVolunteerField && !$hasWorker);
+            $hasWorker = !empty($raw['worker_id']);
+            $isRequired = $meta['required'] || ($isVolunteerField && !$hasWorker);
 
             if ($isRequired && $value === '') {
                 $errors[] = "Field '{$field}' is required.";
@@ -115,14 +116,14 @@ class Contract
         // Cross-field validation: start_date ≤ end_date
         if (!empty($data['start_date']) && !empty($data['end_date'])) {
             $start = \DateTime::createFromFormat('Y-m-d', $data['start_date']);
-            $end   = \DateTime::createFromFormat('Y-m-d', $data['end_date']);
+            $end = \DateTime::createFromFormat('Y-m-d', $data['end_date']);
             if ($start && $end && $start > $end) {
                 $errors[] = "start_date must be before or equal to end_date.";
             }
         }
 
         // Defaults
-        $data['status']   = $data['status']   ?: 'draft';
+        $data['status'] = $data['status'] ?: 'draft';
         $data['language'] = $data['language'] ?: 'both';
 
         if (!empty($raw['id'])) {
@@ -159,25 +160,26 @@ class Contract
         };
 
         $firstName = $pick('first_name', 'volunteer_first');
-        $lastName  = $pick('last_name',  'volunteer_last');
-        $address   = $worker
+        $lastName = $pick('last_name', 'volunteer_last');
+        $address = $worker
             ? Worker::fullAddress($worker)
             : ($contract['volunteer_address'] ?? '');
 
         return [
-            'volunteer_name'    => trim("{$firstName} {$lastName}"),
-            'birth_date'        => self::formatDate($pick('birth_date', 'volunteer_birth')),
-            'address'           => $address,
-            'email'             => $pick('email',      'volunteer_email'),
-            'iban'              => $pick('iban',        'volunteer_iban'),
-            'role'              => $contract['role']              ?? '',
-            'event_name'        => $contract['event_name']        ?? '',
-            'start_date'        => self::formatDate($contract['start_date']  ?? ''),
-            'end_date'          => self::formatDate($contract['end_date']    ?? ''),
-            'total_amount'      => number_format((float)($contract['total_amount'] ?? 0), 2, '.', ' '),
-            'signature_date'    => self::formatDate($contract['signature_date'] ?? ''),
+            'volunteer_name' => trim("{$firstName} {$lastName}"),
+            'birth_date' => self::formatDate($pick('birth_date', 'volunteer_birth')),
+            'address' => $address,
+            'email' => $pick('email', 'volunteer_email'),
+            'iban' => $pick('iban', 'volunteer_iban'),
+            'role' => $contract['role'] ?? '',
+            'event_name' => $contract['event_name'] ?? '',
+            'start_date' => self::formatDate($contract['start_date'] ?? ''),
+            'end_date' => self::formatDate($contract['end_date'] ?? ''),
+            'total_amount' => number_format((float) ($contract['total_amount'] ?? 0), 2, '.', ' '),
+            'signature_date' => self::formatDate($contract['signature_date'] ?? ''),
+            'payment_date' => self::formatDate($contract['payment_date'] ?? ''),
             'organisation_name' => $contract['organisation_name'] ?? '',
-            'organisation_rep'  => $contract['organisation_rep']  ?? '',
+            'organisation_rep' => $contract['organisation_rep'] ?? '',
         ];
     }
 
@@ -186,7 +188,8 @@ class Contract
      */
     public static function formatDate(string $ymd): string
     {
-        if ($ymd === '') return '';
+        if ($ymd === '')
+            return '';
         $dt = \DateTime::createFromFormat('Y-m-d', $ymd);
         return $dt ? $dt->format('d/m/Y') : $ymd;
     }

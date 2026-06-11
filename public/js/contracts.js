@@ -122,7 +122,7 @@
 
   async function renderForm(contractId = null) {
     const container = document.getElementById('contract-form-container');
-    const titleEl   = document.getElementById('contract-form-title');
+    const titleEl = document.getElementById('contract-form-title');
     if (!container) return;
 
     container.innerHTML = '<div class="loading-state"><div class="spinner"></div></div>';
@@ -134,7 +134,7 @@
     if (contractId) {
       try {
         const resp = await Api.contracts.get(contractId);
-        contract   = resp.data;
+        contract = resp.data;
         titleEl.textContent = `Modifier — ${contract.event_name || 'contrat'}`;
       } catch (err) {
         Forms.toast(err.message, 'error');
@@ -174,7 +174,7 @@
     const workerSel = selectorWrap.querySelector('#worker-id-select');
     workerOptions.forEach(opt => {
       const o = document.createElement('option');
-      o.value       = opt.value;
+      o.value = opt.value;
       o.textContent = opt.label;
       if (opt.value === (c.worker_id || '')) o.selected = true;
       workerSel.appendChild(o);
@@ -185,24 +185,25 @@
     // ── Volunteer data card (manual entry or auto-fill) ──
     const card1 = makeCard('Données du volontaire / Volunteer data');
     const grid1 = makeGrid();
-    grid1.appendChild(Forms.makeInputField({ name: 'volunteer_first',   label: 'Prénom / First name',  value: c.volunteer_first   || '' }));
-    grid1.appendChild(Forms.makeInputField({ name: 'volunteer_last',    label: 'Nom / Last name',       value: c.volunteer_last    || '' }));
-    grid1.appendChild(Forms.makeInputField({ name: 'volunteer_birth',   label: 'Date de naissance',     type: 'date', value: c.volunteer_birth || '' }));
-    grid1.appendChild(Forms.makeInputField({ name: 'volunteer_address', label: 'Adresse complète',       value: c.volunteer_address || '' }));
-    grid1.appendChild(Forms.makeInputField({ name: 'volunteer_email',   label: 'E-mail',                 type: 'email', value: c.volunteer_email || '' }));
-    grid1.appendChild(Forms.makeInputField({ name: 'volunteer_iban',    label: 'IBAN',                   value: c.volunteer_iban    || '', placeholder: 'BE00 0000 0000 0000' }));
+    grid1.appendChild(Forms.makeInputField({ name: 'volunteer_first', label: 'Prénom / First name', value: c.volunteer_first || '' }));
+    grid1.appendChild(Forms.makeInputField({ name: 'volunteer_last', label: 'Nom / Last name', value: c.volunteer_last || '' }));
+    grid1.appendChild(Forms.makeInputField({ name: 'volunteer_birth', label: 'Date de naissance', type: 'date', value: c.volunteer_birth || '' }));
+    grid1.appendChild(Forms.makeInputField({ name: 'volunteer_address', label: 'Adresse complète', value: c.volunteer_address || '' }));
+    grid1.appendChild(Forms.makeInputField({ name: 'volunteer_email', label: 'E-mail', type: 'email', value: c.volunteer_email || '' }));
+    grid1.appendChild(Forms.makeInputField({ name: 'volunteer_iban', label: 'IBAN', value: c.volunteer_iban || '', placeholder: 'BE00 0000 0000 0000' }));
     card1.querySelector('.form-card-body').appendChild(grid1);
     container.appendChild(card1);
 
     // ── Contract details card ──
     const card2 = makeCard('Détails du contrat / Contract details');
     const grid2 = makeGrid();
-    grid2.appendChild(Forms.makeInputField({ name: 'event_name',        label: 'Nom de l\'événement',   required: true,  value: c.event_name        || '' }));
-    grid2.appendChild(Forms.makeInputField({ name: 'role',              label: 'Fonction / Role',        required: true,  value: c.role              || '' }));
-    grid2.appendChild(Forms.makeInputField({ name: 'start_date',        label: 'Date de début',          required: true,  type: 'date', value: c.start_date || '' }));
-    grid2.appendChild(Forms.makeInputField({ name: 'end_date',          label: 'Date de fin',            required: true,  type: 'date', value: c.end_date   || '' }));
-    grid2.appendChild(Forms.makeInputField({ name: 'total_amount',      label: 'Montant (€)',            required: true,  type: 'number', value: c.total_amount || '', placeholder: '0.00' }));
-    grid2.appendChild(Forms.makeInputField({ name: 'signature_date',    label: 'Date de signature',      required: true,  type: 'date', value: c.signature_date || '' }));
+    grid2.appendChild(Forms.makeInputField({ name: 'event_name', label: 'Nom de l\'événement', required: true, value: c.event_name || '' }));
+    grid2.appendChild(Forms.makeInputField({ name: 'role', label: 'Fonction / Role', required: true, value: c.role || '' }));
+    grid2.appendChild(Forms.makeInputField({ name: 'start_date', label: 'Date de début', required: true, type: 'date', value: c.start_date || '' }));
+    grid2.appendChild(Forms.makeInputField({ name: 'end_date', label: 'Date de fin', required: true, type: 'date', value: c.end_date || '' }));
+    grid2.appendChild(Forms.makeInputField({ name: 'total_amount', label: 'Montant (€)', required: true, type: 'number', value: c.total_amount || '', placeholder: '0.00' }));
+    grid2.appendChild(Forms.makeInputField({ name: 'signature_date', label: 'Date de signature', required: true, type: 'date', value: c.signature_date || '' }));
+    grid2.appendChild(Forms.makeInputField({ name: 'payment_date', label: 'Date de paiement', required: true, type: 'date', value: c.payment_date || '' }));
     card2.querySelector('.form-card-body').appendChild(grid2);
     container.appendChild(card2);
 
@@ -210,7 +211,7 @@
     const card3 = makeCard('Organisation');
     const grid3 = makeGrid();
     grid3.appendChild(Forms.makeInputField({ name: 'organisation_name', label: 'Nom de l\'organisation', required: true, value: c.organisation_name || '' }));
-    grid3.appendChild(Forms.makeInputField({ name: 'organisation_rep',  label: 'Représentant / Rep',     required: true, value: c.organisation_rep  || '' }));
+    grid3.appendChild(Forms.makeInputField({ name: 'organisation_rep', label: 'Représentant / Rep', required: true, value: c.organisation_rep || '' }));
     card3.querySelector('.form-card-body').appendChild(grid3);
     container.appendChild(card3);
 
@@ -220,8 +221,8 @@
     grid4.appendChild(Forms.makeSelectField({
       name: 'status', label: 'Statut', value: c.status || 'draft',
       options: [
-        { value: 'draft',    label: 'Brouillon / Draft' },
-        { value: 'signed',   label: 'Signé / Signed' },
+        { value: 'draft', label: 'Brouillon / Draft' },
+        { value: 'signed', label: 'Signé / Signed' },
         { value: 'archived', label: 'Archivé / Archived' },
       ],
     }));
@@ -229,8 +230,8 @@
       name: 'language', label: 'Langue / Language', value: c.language || 'both',
       options: [
         { value: 'both', label: 'Bilingue NL + EN' },
-        { value: 'nl',   label: 'Néerlandais seulement' },
-        { value: 'en',   label: 'English only' },
+        { value: 'nl', label: 'Néerlandais seulement' },
+        { value: 'en', label: 'English only' },
       ],
     }));
     card4.querySelector('.form-card-body').appendChild(grid4);
@@ -334,8 +335,8 @@
 
   async function deleteContract(id, name) {
     const confirmed = await Forms.confirm({
-      title       : 'Supprimer le contrat',
-      body        : `Voulez-vous vraiment supprimer le contrat "${name}" ? Cette action est irréversible.`,
+      title: 'Supprimer le contrat',
+      body: `Voulez-vous vraiment supprimer le contrat "${name}" ? Cette action est irréversible.`,
       confirmLabel: 'Supprimer',
     });
     if (!confirmed) return;
@@ -355,12 +356,12 @@
 
   function prefillVolunteerFields(container, worker) {
     const fieldMap = {
-      volunteer_first  : worker.first_name  || '',
-      volunteer_last   : worker.last_name   || '',
-      volunteer_birth  : worker.birth_date  || '',
+      volunteer_first: worker.first_name || '',
+      volunteer_last: worker.last_name || '',
+      volunteer_birth: worker.birth_date || '',
       volunteer_address: [worker.address, worker.postal_code, worker.city, worker.country].filter(Boolean).join(', '),
-      volunteer_email  : worker.email       || '',
-      volunteer_iban   : worker.iban        || '',
+      volunteer_email: worker.email || '',
+      volunteer_iban: worker.iban || '',
     };
     for (const [name, value] of Object.entries(fieldMap)) {
       const el = container.querySelector(`[name="${name}"]`);
@@ -369,7 +370,7 @@
   }
 
   function clearVolunteerFields(container) {
-    ['volunteer_first','volunteer_last','volunteer_birth','volunteer_address','volunteer_email','volunteer_iban']
+    ['volunteer_first', 'volunteer_last', 'volunteer_birth', 'volunteer_address', 'volunteer_email', 'volunteer_iban']
       .forEach(name => {
         const el = container.querySelector(`[name="${name}"]`);
         if (el) el.value = '';
@@ -377,7 +378,7 @@
   }
 
   function setVolunteerFieldsReadonly(container, readonly) {
-    ['volunteer_first','volunteer_last','volunteer_birth','volunteer_address','volunteer_email','volunteer_iban']
+    ['volunteer_first', 'volunteer_last', 'volunteer_birth', 'volunteer_address', 'volunteer_email', 'volunteer_iban']
       .forEach(name => {
         const el = container.querySelector(`[name="${name}"]`);
         if (el) {
@@ -391,7 +392,7 @@
     const card = document.createElement('div');
     card.className = 'form-card';
     const h = document.createElement('h3');
-    h.className   = 'form-card-title';
+    h.className = 'form-card-title';
     h.textContent = title;
     const body = document.createElement('div');
     body.className = 'form-card-body';

@@ -31,7 +31,7 @@ class ContractTemplate
     {
         $vars = self::escapeVars($vars);
 
-        $html  = '<div class="contract-document">';
+        $html = '<div class="contract-document">';
 
         if (in_array($language, ['both', 'nl'], true)) {
             $html .= '<div class="contract-column contract-nl">';
@@ -74,7 +74,7 @@ class ContractTemplate
     private static function escapeVars(array $vars): array
     {
         return array_map(
-            fn($v) => htmlspecialchars((string)$v, ENT_QUOTES | ENT_HTML5, 'UTF-8'),
+            fn($v) => htmlspecialchars((string) $v, ENT_QUOTES | ENT_HTML5, 'UTF-8'),
             $vars
         );
     }
@@ -86,54 +86,52 @@ class ContractTemplate
     private static function templateNl(): string
     {
         return <<<'HTML'
-<div class="contract-lang-header">
-    <span class="lang-badge lang-nl">Nederlands</span>
-</div>
-
 <h2 class="contract-title">OVEREENKOMST VOOR VRIJWILLIGERSWERK</h2>
+<section class="contract-section">
+    <p>Tussen de Partijen:</p>
+
+<section>
 
 <section class="contract-section">
     <h3>Artikel 1 – Partijen</h3>
     <p>
-        De organisatie <strong>{{organisation_name}}</strong>,
-        vertegenwoordigd door <strong>{{organisation_rep}}</strong>,
-        hierna "de Organisatie" genoemd,
+        Parapluie vzw, bedrijfsnummer 0458.091.012<br>
+        geregistreerd kantoor op Henri Jasparlaan 122, 1060 Sint-Gillis<br>
+        vertegenwoordigd door Eliah Debaene<br>
+         hierna genoemd "De Organisator"
+        
     </p>
+    <p>en,</p>
     <p>
-        En de heer/mevrouw <strong>{{volunteer_name}}</strong>,
-        geboren op <strong>{{birth_date}}</strong>,
-        woonachtig te <strong>{{address}}</strong>,
-        e-mail: <strong>{{email}}</strong>,
-        IBAN: <strong>{{iban}}</strong>,
-        hierna "de Vrijwilliger" genoemd,
-    </p>
-    <p>
-        komen het volgende overeen:
-    </p>
+        Naam : {{volunteer_name}}<br>
+        Geboortedatum : {{birth_date}}<br>
+        Adres : {{address}}<br>
+        e-mail: <strong>{{email}}</strong><br>
+        IBAN: <strong>{{iban}}</strong><br>
+        hierna "de Vrijwilliger" genoemd,<br>
+    
+    <strong>
+        wordt het volgende overeengekomen:
+</strong></p>
 </section>
 
 <section class="contract-section">
     <h3>Artikel 2 – Voorwerp van de overeenkomst</h3>
     <p>
-        De Vrijwilliger verbindt zich ertoe om vrijwillige diensten te verlenen
-        in de hoedanigheid van <strong>{{role}}</strong>
-        tijdens het evenement <strong>{{event_name}}</strong>,
-        van <strong>{{start_date}}</strong> tot en met <strong>{{end_date}}</strong>.
+        De vrijwilliger zal zich inzetten voor het evenement <strong>{{event_name}}</strong> (hierna “het evenement” genoemd) en diverse taken uitvoeren vóór, tijdens of na het evenement.
+        Het werk gaat door van  <strong>{{start_date}}</strong> tot en met <strong>{{end_date}}</strong>.
     </p>
 </section>
 
 <section class="contract-section">
     <h3>Artikel 3 – Vergoeding</h3>
     <p>
-        In het kader van vrijwilligerswerk in de zin van de wet van 3 juli 2005
-        betreffende de rechten van vrijwilligers, kent de Organisatie de Vrijwilliger
-        een kostenvergoeding toe van <strong>€&nbsp;{{total_amount}}</strong>
-        ter dekking van gemaakte onkosten.
+        De Vrijwilliger ontvangt een vergoeding van maximaal €44,02 per dag voor het verrichtte werk, in overeenstemming met de wettelijke regels voor vrijwilligersvergoedingen. De totale vergoeding bedraagt <strong>€&nbsp;{{total_amount}}</strong>
+        en zal uiterlijk op {{payment_date}}    
     </p>
     <p>
-        Dit bedrag wordt gestort op het rekeningnummer <strong>{{iban}}</strong>
-        na afloop van de vrijwilligersactiviteit.
-    </p>
+        worden overgemaakt naar het volgende rekeningnummer: <strong>{{iban}}</strong>
+        Deze vergoeding is bedoeld als kostenvergoeding en niet als salaris. Deze overeenkomst vormt geen arbeidsovereenkomst. De Organisatie heeft geen verplichtingen inzake sociale zekerheid of belastingafdracht.    </p>
 </section>
 
 <section class="contract-section">
@@ -184,10 +182,16 @@ class ContractTemplate
         arrondissement van de maatschappelijke zetel van de Organisatie bevoegd.
     </p>
 </section>
+<section class="contract-section">
+    <h3>Artikel 9 – Vrijwilligersverzekering</h3>
+    <p>
+       De organisatie bevestigt dat een wettelijke vrijwilligersverzekering onder polisnummer 518 597 159
+    </p>
+</section>
 
 <section class="contract-section contract-signatures">
     <h3>Handtekeningen</h3>
-    <p>Opgesteld te _____________, op <strong>{{signature_date}}</strong></p>
+    <p>Opgesteld te Brussel, op <strong>{{signature_date}}</strong> en ondertekend in tweevoud.</p>
     <div class="signature-grid">
         <div class="signature-block">
             <p><strong>Voor de Organisatie</strong></p>
@@ -213,53 +217,49 @@ HTML;
     private static function templateEn(): string
     {
         return <<<'HTML'
-<div class="contract-lang-header">
-    <span class="lang-badge lang-en">English</span>
-</div>
+
 
 <h2 class="contract-title">VOLUNTEER AGREEMENT</h2>
-
 <section class="contract-section">
-    <h3>Article 1 – Parties</h3>
-    <p>
-        The organisation <strong>{{organisation_name}}</strong>,
-        represented by <strong>{{organisation_rep}}</strong>,
-        hereinafter referred to as "the Organisation",
-    </p>
-    <p>
-        And Mr/Ms <strong>{{volunteer_name}}</strong>,
-        born on <strong>{{birth_date}}</strong>,
-        residing at <strong>{{address}}</strong>,
-        e-mail: <strong>{{email}}</strong>,
-        IBAN: <strong>{{iban}}</strong>,
-        hereinafter referred to as "the Volunteer",
-    </p>
-    <p>
-        agree to the following:
-    </p>
+    <p>Between the Parties:</p>
+
 </section>
 
 <section class="contract-section">
-    <h3>Article 2 – Subject Matter</h3>
+    <h3>Article 1 – Parties</h3>
+    <p>Parapluie vzw, business number 0458.091.012,<br> registered office at Henri Jasparlaan 122, 1060
+        Sint-Gillis,<br> represented by Eliah Debaene,<br> hereinafter referred to as "The Organizer",
+    </p>
+    <p>and,</p>
     <p>
-        The Volunteer undertakes to provide voluntary services
-        in the capacity of <strong>{{role}}</strong>
-        during the event <strong>{{event_name}}</strong>,
-        from <strong>{{start_date}}</strong> to <strong>{{end_date}}</strong> (inclusive).
+        Name: {{volunteer_name}}<br>
+        Date of birth: {{birth_date}}<br>
+        Address: {{address}}<br>
+        Email address: {{email}}<br>
+        IBAN: <strong>{{iban}}</strong><br>
+        hereinafter referred to as "The Volunteer"<br>
+        <strong>it is agreed as follows:</strong>
+    </p>
+
+</section>
+
+<section class="contract-section">
+    <h3>Article 2 – Object of the agreement</h3>
+    <p>
+        The volunteer will contribute to the event <strong>{{event_name}}</strong> (hereinafter referred to as “the Event”) by executing various tasks before, during, or after the Event.
+        The volunteer will work from <strong>{{start_date}}</strong> until <strong>{{end_date}}</strong>.
     </p>
 </section>
 
 <section class="contract-section">
     <h3>Article 3 – Compensation</h3>
     <p>
-        Within the framework of voluntary work as defined by the Belgian Act of 3 July 2005
-        on the rights of volunteers, the Organisation grants the Volunteer
-        an expense allowance of <strong>€&nbsp;{{total_amount}}</strong>
-        to cover expenses incurred.
+        The Volunteer will receive compensation of up to €44,02 per day for their work, in accordance with the legal regulations for volunteer compensation. The total compensation amounts to <strong>€&nbsp;{{total_amount}}</strong>
+        and will be paid no later than {{payment_date}}
     </p>
     <p>
-        This amount will be transferred to bank account <strong>{{iban}}</strong>
-        upon completion of the volunteer activity.
+        into the following account: <strong>{{iban}}</strong>
+        This compensation is intended as reimbursement of expenses and not as a salary. This agreement does not constitute an employment contract. The Organizer has no obligations regarding social security or tax regulations.
     </p>
 </section>
 
@@ -311,13 +311,19 @@ HTML;
         of the Organisation's registered office shall have exclusive jurisdiction.
     </p>
 </section>
+<section class="contract-section">
+    <h3>Artikel 9 – Vrijwilligersverzekering</h3>
+    <p>
+       The organiser confirms that a legal volunteer insurance policy has been subscribed to under the policy number 518 597 159
+    </p>
+</section>
 
 <section class="contract-section contract-signatures">
     <h3>Signatures</h3>
-    <p>Drawn up at _____________, on <strong>{{signature_date}}</strong></p>
+    <p>This agreement is drawn up in Brussels, on <strong>{{signature_date}}</strong> and signed in duplicate.</p>
     <div class="signature-grid">
         <div class="signature-block">
-            <p><strong>For the Organisation</strong></p>
+            <p><strong>For Parapluie VZW</strong></p>
             <p>{{organisation_rep}}</p>
             <div class="signature-line"></div>
             <p class="signature-label">Signature</p>
