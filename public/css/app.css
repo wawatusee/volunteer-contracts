@@ -887,6 +887,12 @@ img {
   letter-spacing: .08em;
   color: var(--text-muted) !important;
 }
+.signature-img {
+    max-height: 80px;
+    max-width : 200px;
+    display   : block;
+    margin    : var(--space-4) 0;
+}
 
 /* --------------------------------------------------------------------------
    13. Empty & loading states

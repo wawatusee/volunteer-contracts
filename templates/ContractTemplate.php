@@ -196,6 +196,7 @@ class ContractTemplate
         <div class="signature-block">
             <p><strong>Voor de Organisatie</strong></p>
             <p>{{organisation_rep}}</p>
+            <img src="/img/signature.png" alt="Signature" class="signature-img">
             <div class="signature-line"></div>
             <p class="signature-label">Handtekening</p>
         </div>
@@ -325,6 +326,7 @@ HTML;
         <div class="signature-block">
             <p><strong>For Parapluie VZW</strong></p>
             <p>{{organisation_rep}}</p>
+            <img src="/img/signature.png" alt="Signature" class="signature-img">
             <div class="signature-line"></div>
             <p class="signature-label">Signature</p>
         </div>
