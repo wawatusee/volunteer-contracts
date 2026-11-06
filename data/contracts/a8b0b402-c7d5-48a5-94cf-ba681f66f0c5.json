@@ -1,0 +1,23 @@
+{
+    "worker_id": "933b7caa-3a43-42fc-a58b-db8b0273fafc",
+    "volunteer_first": "Hana",
+    "volunteer_last": "Gallego Borkowski",
+    "volunteer_birth": "1996-12-04",
+    "volunteer_address": "Boulevard Adolphe Max 86,2, 1000, Brussels, Belgique",
+    "volunteer_email": "info@hexagon.brussels",
+    "volunteer_iban": "BE84737059646959",
+    "role": "Set up and bar team",
+    "event_name": "Gloom Club",
+    "start_date": "2026-09-20",
+    "end_date": "2026-09-25",
+    "payment_date": "2026-10-10",
+    "total_amount": "127.5",
+    "signature_date": "2026-09-20",
+    "organisation_name": "Parapluie VZW",
+    "organisation_rep": "Eliah Debaene",
+    "status": "draft",
+    "language": "en",
+    "id": "a8b0b402-c7d5-48a5-94cf-ba681f66f0c5",
+    "created_at": "2026-09-25T14:24:47+00:00",
+    "updated_at": "2026-09-25T14:53:43+00:00"
+}

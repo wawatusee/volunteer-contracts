@@ -68,16 +68,18 @@
         break;
 
       case 'contract-form':
-        activateNavItem('contracts');
-        showView('view-contract-form');
-        ContractsUI.renderForm(data.id || null);
-        break;
+          activateNavItem('contracts');
+          showView('view-contract-form');
+          ContractsUI.renderForm(data.id || null, data.blank || false);
+          break;
 
       case 'worker-form':
         activateNavItem('workers');
         showView('view-worker-form');
         WorkersUI.renderForm(data.id || null);
         break;
+      
+      
 
       case 'preview': {
         activateNavItem('contracts');

@@ -1,0 +1,23 @@
+{
+    "worker_id": "e6f9c9db-5f8e-4ae2-97e6-c57dce76e083",
+    "volunteer_first": "kieran",
+    "volunteer_last": "labarrère",
+    "volunteer_birth": "1969-08-02",
+    "volunteer_address": "chaussée de haecht, 1030, Schaerbeek, Belgique",
+    "volunteer_email": "kieran1@hotmail.fr",
+    "volunteer_iban": "BE44377106982145",
+    "role": "polyvalent",
+    "event_name": "Play label",
+    "start_date": "2026-06-13",
+    "end_date": "2026-06-16",
+    "payment_date": "2026-06-18",
+    "total_amount": "120",
+    "signature_date": "2026-06-10",
+    "organisation_name": "Parapluie",
+    "organisation_rep": "Eliah Debaene",
+    "status": "archived",
+    "language": "both",
+    "id": "8e083cdd-add5-4627-a3bf-64f4b8ee1a69",
+    "created_at": "2026-06-10T17:49:12+00:00",
+    "updated_at": "2026-06-11T17:08:32+00:00"
+}

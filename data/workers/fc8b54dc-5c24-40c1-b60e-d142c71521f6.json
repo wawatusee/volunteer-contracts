@@ -1,0 +1,16 @@
+{
+    "first_name": "Hichame",
+    "last_name": "Chelafa",
+    "birth_date": "1986-01-29",
+    "address": "Rue du Choeur 51",
+    "city": "Molenbeek",
+    "postal_code": "1080",
+    "country": "Belgique",
+    "email": "hichame.ch@hotmail.fr",
+    "iban": "BE15735075043430",
+    "phone": "",
+    "notes": "",
+    "id": "fc8b54dc-5c24-40c1-b60e-d142c71521f6",
+    "created_at": "2026-09-26T18:28:15+00:00",
+    "updated_at": "2026-09-26T18:28:15+00:00"
+}

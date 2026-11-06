@@ -88,6 +88,9 @@
               <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
             </svg>
           </button>
+          <button class="btn btn-ghost btn-sm btn-duplicate-contract" data-id="${Forms.escHtml(c.id)}">
+              Dupliquer
+          </button>
           <button class="btn btn-ghost btn-sm btn-delete-contract" data-id="${Forms.escHtml(c.id)}" data-name="${Forms.escHtml(c.event_name || '')}" title="Supprimer">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="3 6 5 6 21 6"/>
@@ -107,7 +110,9 @@
     container.querySelectorAll('.btn-edit-contract').forEach(btn => {
       btn.addEventListener('click', () => App.navigateTo('contract-form', { id: btn.dataset.id }));
     });
-
+    container.querySelectorAll('.btn-duplicate-contract').forEach(btn => {
+    btn.addEventListener('click', () => App.navigateTo('contract-form', { id: btn.dataset.id, blank: true }));
+});
     container.querySelectorAll('.btn-delete-contract').forEach(btn => {
       btn.addEventListener('click', () => deleteContract(btn.dataset.id, btn.dataset.name));
     });
@@ -120,7 +125,7 @@
   /** Track the currently selected worker to avoid redundant API calls. */
   let _selectedWorker = null;
 
-  async function renderForm(contractId = null) {
+  async function renderForm(contractId = null, blank = false) {
     const container = document.getElementById('contract-form-container');
     const titleEl = document.getElementById('contract-form-title');
     if (!container) return;
@@ -145,6 +150,17 @@
     }
 
     const c = contract || {};
+    // Si blank, on vide les champs volontaire
+    if (blank) {
+      c.worker_id = '';
+      c.volunteer_first = '';
+      c.volunteer_last = '';
+      c.volunteer_birth = '';
+      c.volunteer_address = '';
+      c.volunteer_email = '';
+      c.volunteer_iban = '';
+      c.id= '';
+    }
 
     // Load workers for the selector
     let workerOptions = [{ value: '', label: '— Saisie libre (sans volontaire existant) —' }];
@@ -198,7 +214,7 @@
     const card2 = makeCard('Détails du contrat / Contract details');
     const grid2 = makeGrid();
     grid2.appendChild(Forms.makeInputField({ name: 'event_name', label: 'Nom de l\'événement', required: true, value: c.event_name || '' }));
-    grid2.appendChild(Forms.makeInputField({ name: 'role', label: 'Fonction / Role', required: true, value: c.role || '' }));
+    grid2.appendChild(Forms.makeInputField({ name: 'role', label: 'Fonction / Role', required: false, value: c.role || '' }));
     grid2.appendChild(Forms.makeInputField({ name: 'start_date', label: 'Date de début', required: true, type: 'date', value: c.start_date || '' }));
     grid2.appendChild(Forms.makeInputField({ name: 'end_date', label: 'Date de fin', required: true, type: 'date', value: c.end_date || '' }));
     grid2.appendChild(Forms.makeInputField({ name: 'total_amount', label: 'Montant (€)', required: true, type: 'number', value: c.total_amount || '', placeholder: '0.00' }));
