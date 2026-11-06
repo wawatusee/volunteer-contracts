@@ -1,0 +1,16 @@
+{
+    "first_name": "Sarina",
+    "last_name": "Bongaerts",
+    "birth_date": "1997-01-10",
+    "address": "Rue de l&#039;Enseignement 42, bte 3",
+    "city": "Bruxelles",
+    "postal_code": "1000",
+    "country": "Belgique",
+    "email": "info@hexagon.brussels",
+    "iban": "BE61735034864717",
+    "phone": "",
+    "notes": "",
+    "id": "a58a56b8-f9c6-480e-8a3f-d95ece44c46a",
+    "created_at": "2026-09-25T14:45:26+00:00",
+    "updated_at": "2026-09-25T14:45:26+00:00"
+}

@@ -1,0 +1,16 @@
+{
+    "first_name": "Inez",
+    "last_name": "Van Volsom",
+    "birth_date": "1997-04-04",
+    "address": "Vooruitgangstraat 217",
+    "city": "Schaarbeek",
+    "postal_code": "1030",
+    "country": "Belgique",
+    "email": "info@hexagon.brussels",
+    "iban": "BE41063486287610",
+    "phone": "",
+    "notes": "",
+    "id": "7dfaf5b8-ddd3-4b87-8122-c6ffd04e406d",
+    "created_at": "2026-10-05T12:34:56+02:00",
+    "updated_at": "2026-10-05T12:34:56+02:00"
+}

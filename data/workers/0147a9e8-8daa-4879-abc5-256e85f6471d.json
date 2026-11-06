@@ -1,0 +1,16 @@
+{
+    "first_name": "Nour",
+    "last_name": "Hijazi",
+    "birth_date": "2000-12-10",
+    "address": "Rue Bonneels 24",
+    "city": "Saint-Josse-ten-Noode",
+    "postal_code": "1210",
+    "country": "Belgique",
+    "email": "info@hexagon.brussels",
+    "iban": "BE53731062825053",
+    "phone": "",
+    "notes": "",
+    "id": "0147a9e8-8daa-4879-abc5-256e85f6471d",
+    "created_at": "2026-09-09T15:51:20+00:00",
+    "updated_at": "2026-09-09T15:51:20+00:00"
+}

@@ -1,0 +1,16 @@
+{
+    "first_name": "Jeffrey",
+    "last_name": "Wynnyk",
+    "birth_date": "1996-01-06",
+    "address": "Fazantenlaan 69",
+    "city": "Beringen (Paal)",
+    "postal_code": "3583",
+    "country": "Belgique",
+    "email": "info@hexagon.brussels",
+    "iban": "BE65063567213696",
+    "phone": "",
+    "notes": "",
+    "id": "2c5356e9-0891-4388-b40d-3f0ca6dc5a30",
+    "created_at": "2026-09-25T14:42:27+00:00",
+    "updated_at": "2026-09-25T14:44:18+00:00"
+}

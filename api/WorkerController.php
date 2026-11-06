@@ -30,15 +30,25 @@ class WorkerController extends BaseController
 
     public function index(array $params = []): void
     {
-        $search  = strtolower(trim($_GET['q'] ?? ''));
+        $search = strtolower(trim($_GET['q'] ?? ''));
         $workers = $this->storage->findAll(Worker::COLLECTION);
+        $workers = $this->storage->findAll(Worker::COLLECTION);
+
+        usort(
+            $workers,
+            fn($a, $b) =>
+                strcmp(
+                    strtolower(($a['first_name'] ?? '') . ($a['last_name'] ?? '')),
+                    strtolower(($b['first_name'] ?? '') . ($b['last_name'] ?? ''))
+                )
+        );
 
         if ($search !== '') {
             $workers = array_values(array_filter($workers, function (array $w) use ($search): bool {
                 $haystack = strtolower(
                     ($w['first_name'] ?? '') . ' ' .
-                    ($w['last_name']  ?? '') . ' ' .
-                    ($w['email']      ?? '')
+                    ($w['last_name'] ?? '') . ' ' .
+                    ($w['email'] ?? '')
                 );
                 return str_contains($haystack, $search);
             }));
@@ -46,11 +56,11 @@ class WorkerController extends BaseController
 
         // Return a lightweight list (no IBAN in list view for privacy)
         $list = array_map(fn($w) => [
-            'id'         => $w['id'],
+            'id' => $w['id'],
             'first_name' => $w['first_name'],
-            'last_name'  => $w['last_name'],
-            'email'      => $w['email'],
-            'city'       => $w['city'] ?? '',
+            'last_name' => $w['last_name'],
+            'email' => $w['email'],
+            'city' => $w['city'] ?? '',
             'updated_at' => $w['updated_at'],
         ], $workers);
 
@@ -79,7 +89,7 @@ class WorkerController extends BaseController
 
     public function show(array $params = []): void
     {
-        $id     = $this->param($params, 'id');
+        $id = $this->param($params, 'id');
         $worker = $this->storage->find(Worker::COLLECTION, $id);
 
         if ($worker === null) {
@@ -101,7 +111,7 @@ class WorkerController extends BaseController
             $this->notFound("Worker '{$id}' not found.");
         }
 
-        $input       = $this->input();
+        $input = $this->input();
         $input['id'] = $id; // ensure the id is preserved
 
         $result = Worker::fromInput($input);
@@ -111,7 +121,7 @@ class WorkerController extends BaseController
         }
 
         // Preserve original created_at
-        $original              = $this->storage->find(Worker::COLLECTION, $id);
+        $original = $this->storage->find(Worker::COLLECTION, $id);
         $result['data']['created_at'] = $original['created_at'] ?? date('c');
 
         $saved = $this->storage->save(Worker::COLLECTION, $result['data']);

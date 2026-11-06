@@ -1,0 +1,16 @@
+{
+    "first_name": "Thomas",
+    "last_name": "Franckx",
+    "birth_date": "1995-04-18",
+    "address": "Alsembergsesteenweg 65a",
+    "city": "Sint-Gillis",
+    "postal_code": "1060",
+    "country": "Belgique",
+    "email": "info@hexagon.brussels",
+    "iban": "BE82950146211768",
+    "phone": "",
+    "notes": "",
+    "id": "3f16925a-5117-4173-9835-a33542a8de2d",
+    "created_at": "2026-10-04T15:33:39+02:00",
+    "updated_at": "2026-10-04T15:33:39+02:00"
+}
